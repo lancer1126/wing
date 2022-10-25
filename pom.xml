@@ -33,8 +33,8 @@
         <spring-boot.version>2.7.4</spring-boot.version>
 
         <!-- spring cloud -->
-        <spring-cloud.version>2021.0.2</spring-cloud.version>
-        <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
+        <spring-cloud.version>2021.0.4</spring-cloud.version>
+        <spring-cloud-alibaba.version>2021.0.4.0</spring-cloud-alibaba.version>
 
         <!-- db && orm -->
         <mysql.version>8.0.19</mysql.version>
@@ -53,6 +53,7 @@
         <easyexcel.version>3.0.5</easyexcel.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <nimbus-jose-jwt.version>9.16.1</nimbus-jose-jwt.version>
+        <fastjson2.version>2.0.15</fastjson2.version>
 
         <!-- distributed -->
         <seata.version>1.5.1</seata.version>
@@ -70,12 +71,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>${hutool.version}</version>
         </dependency>
     </dependencies>
 
@@ -203,6 +198,14 @@
                 <artifactId>nimbus-jose-jwt</artifactId>
                 <version>${nimbus-jose-jwt.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -232,5 +235,25 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
+    <repositories>
+        <repository>
+            <id>aliyunmaven</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+    </repositories>
 
 </project>
