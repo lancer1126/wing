@@ -9,6 +9,7 @@ import fun.lance.common.resp.ResultEntity;
 import fun.lance.wing.common.security.adapter.AuthConfigAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
+@Component
 @RequiredArgsConstructor
 public class AuthFilter implements Filter {
 

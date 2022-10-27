@@ -1,11 +1,13 @@
 package fun.lance.wing.common.security.adapter;
 
 import fun.lance.common.feign.FeignInsideAuthConfig;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@Component
 public class AuthConfigAdapter {
 
     /**

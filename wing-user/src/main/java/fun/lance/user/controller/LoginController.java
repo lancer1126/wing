@@ -9,12 +9,14 @@ import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
 @Api(tags = "登录")
 @RestController
+@RequestMapping("/ua")
 @RequiredArgsConstructor
 public class LoginController {
 
@@ -22,7 +24,6 @@ public class LoginController {
 
     @PostMapping ("/login")
     public ResultEntity<TokenInfoVO> login(@Valid @RequestBody AuthDTO authDTO) {
-        System.out.println(MessageUtil.get("login.ok"));
         return ResultEntity.success(null);
     }
 }

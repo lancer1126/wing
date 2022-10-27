@@ -53,7 +53,8 @@
         <easyexcel.version>3.0.5</easyexcel.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <nimbus-jose-jwt.version>9.16.1</nimbus-jose-jwt.version>
-        <fastjson2.version>2.0.15</fastjson2.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <spring.aop.version>2.7.4</spring.aop.version>
 
         <!-- distributed -->
         <seata.version>1.5.1</seata.version>
@@ -92,6 +93,12 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring.aop.version}</version>
             </dependency>
 
             <dependency>
