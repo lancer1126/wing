@@ -4,6 +4,7 @@ public enum RespEnum {
     SUCCESS(200, "success"),
     UNAUTHORIZED(401, "Unauthorized"),
     METHOD_ARGUMENT_NOT_VALID(701, "method argument not valid"),
+    APP_EXCEPTION(777, "application exception"),
     FAIL(400, "fail");
 
     private final Integer code;

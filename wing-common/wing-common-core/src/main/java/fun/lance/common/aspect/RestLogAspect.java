@@ -26,10 +26,10 @@ public class RestLogAspect {
 
         HttpServletRequest request = attributes.getRequest();
         log.info("--------------------------------------- Start ----------------------------------------");
-        log.info("URL             : {}", request.getRequestURL().toString());
-        log.info("Class Method    : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
-        log.info("IP              : {}", request.getRemoteAddr());
-        log.info("Request Args    : {}", joinPoint.getArgs());
+        log.info("URL          : {}", request.getRequestURL().toString());
+        log.info("Class Method : {}.{}", joinPoint.getSignature().getDeclaringTypeName(), joinPoint.getSignature().getName());
+        log.info("IP           : {}", request.getRemoteAddr());
+        log.info("Request Args : {}", joinPoint.getArgs());
         log.info("---------------------------------------- End -----------------------------------------");
     }
 }

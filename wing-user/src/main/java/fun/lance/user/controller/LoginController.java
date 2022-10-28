@@ -1,5 +1,6 @@
 package fun.lance.user.controller;
 
+import fun.lance.api.user.bo.UserInfoTokenBO;
 import fun.lance.api.user.vo.TokenInfoVO;
 import fun.lance.common.resp.ResultEntity;
 import fun.lance.user.dto.AuthDTO;
@@ -20,10 +21,12 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class LoginController {
 
-    private UserAccountService userAccountService;
+    private final UserAccountService userAccountService;
 
     @PostMapping ("/login")
     public ResultEntity<TokenInfoVO> login(@Valid @RequestBody AuthDTO authDTO) {
+        UserInfoTokenBO userInfoToken = userAccountService
+                .getUserInfoToken(authDTO.getPrincipal(), authDTO.getCredentials(), authDTO.getSysType());
         return ResultEntity.success(null);
     }
 }

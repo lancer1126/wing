@@ -57,6 +57,12 @@
             <artifactId>wing-common-security</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-db</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -65,6 +65,9 @@
 
         <!-- http -->
         <okhttp3.version>4.10.0</okhttp3.version>
+
+        <mybatis-spring-boot-starter.version>2.2.2</mybatis-spring-boot-starter.version>
+        <pagehelper-spring-boot-starter.version>1.4.5</pagehelper-spring-boot-starter.version>
     </properties>
 
     <dependencies>

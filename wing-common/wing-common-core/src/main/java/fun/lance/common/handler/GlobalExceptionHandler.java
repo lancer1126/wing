@@ -1,5 +1,6 @@
 package fun.lance.common.handler;
 
+import fun.lance.common.exception.WingException;
 import fun.lance.common.resp.RespEnum;
 import fun.lance.common.resp.ResultEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -36,4 +37,13 @@ public class GlobalExceptionHandler {
         return ResultEntity.fail(RespEnum.METHOD_ARGUMENT_NOT_VALID, errMessages);
     }
 
+    @ExceptionHandler({WingException.class})
+    public ResultEntity<Object> WingExceptionHandler(WingException we) {
+        log.error("WingException: {}", we.toString());
+        RespEnum respEnum = we.getRespEnum();
+        if (respEnum != null) {
+            return ResultEntity.fail(respEnum, we.getObject());
+        }
+        return ResultEntity.fail(RespEnum.APP_EXCEPTION, we.getMessage(), we.getObject());
+    }
 }
