@@ -27,6 +27,7 @@ public class LoginController {
     public ResultEntity<TokenInfoVO> login(@Valid @RequestBody AuthDTO authDTO) {
         UserInfoTokenBO userInfoToken = userAccountService
                 .getUserInfoToken(authDTO.getPrincipal(), authDTO.getCredentials(), authDTO.getSysType());
+        System.out.println(userInfoToken);
         return ResultEntity.success(null);
     }
 }

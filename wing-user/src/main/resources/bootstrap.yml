@@ -9,6 +9,12 @@ spring:
         server-addr: 127.0.0.1:8848
         username: nacos
         password: nacos
+      config:
+        server-addr: ${spring.cloud.nacos.discovery.server-addr}
+        file-extension: yml
+        shared-configs: application-wing-dev.yml
+        username: ${spring.cloud.nacos.discovery.username}
+        password: ${spring.cloud.nacos.discovery.password}
   messages:
     basename: i18n/messages
     encoding: UTF-8
