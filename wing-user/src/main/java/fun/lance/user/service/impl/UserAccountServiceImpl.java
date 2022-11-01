@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import fun.lance.api.user.bo.UserInfoTokenBO;
 import fun.lance.common.exception.WingException;
 import fun.lance.common.utils.PrincipalUtil;
-import fun.lance.user.converter.AccountConverter;
+import fun.lance.user.model.mapstruct.AccountMapper;
 import fun.lance.user.enums.AccountStatusEnum;
 import fun.lance.user.mapper.AuthAccountMapper;
 import fun.lance.user.service.UserAccountService;
@@ -25,7 +25,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     private final AuthAccountMapper authAccountMapper;
     private final PasswordEncoder passwordEncoder;
-    private final AccountConverter accountConverter;
+    private final AccountMapper accountMapper;
 
     @Override
     public UserInfoTokenBO getUserInfoToken(String username, String password, Integer sysType) {
@@ -55,7 +55,6 @@ public class UserAccountServiceImpl implements UserAccountService {
         if (!passwordEncoder.matches(password, acctVerifyBO.getPassword())) {
             throw new WingException(MessageUtil.get("login.error"));
         }
-        UserInfoTokenBO convert = accountConverter.convert(acctVerifyBO);
-        return convert;
+        return accountMapper.convert(acctVerifyBO);
     }
 }

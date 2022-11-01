@@ -1,6 +1,6 @@
-package fun.lance.user.model;
+package fun.lance.user.model.domain;
 
-import fun.lance.common.model.BaseModel;
+import fun.lance.common.base.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

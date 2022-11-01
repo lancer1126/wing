@@ -52,6 +52,7 @@
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <fastjson.version>1.2.83</fastjson.version>
         <spring.aop.version>2.7.4</spring.aop.version>
+        <jedis.version>3.9.0</jedis.version>
 
         <!-- distributed -->
         <seata.version>1.5.1</seata.version>
@@ -203,6 +204,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

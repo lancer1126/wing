@@ -1,7 +1,7 @@
 package fun.lance.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import fun.lance.user.model.AuthAccount;
+import fun.lance.user.model.domain.AuthAccount;
 import fun.lance.wing.common.security.bo.AuthAccountVerifyBO;
 import org.apache.ibatis.annotations.Param;
 

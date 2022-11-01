@@ -1,4 +1,4 @@
-package fun.lance.user.dto;
+package fun.lance.user.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

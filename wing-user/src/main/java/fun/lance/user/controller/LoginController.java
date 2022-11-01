@@ -3,9 +3,9 @@ package fun.lance.user.controller;
 import fun.lance.api.user.bo.UserInfoTokenBO;
 import fun.lance.api.user.vo.TokenInfoVO;
 import fun.lance.common.resp.ResultEntity;
-import fun.lance.user.dto.AuthDTO;
+import fun.lance.user.manager.TokenManager;
+import fun.lance.user.model.dto.AuthDTO;
 import fun.lance.user.service.UserAccountService;
-import fun.lance.user.utils.MessageUtil;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,12 +22,12 @@ import javax.validation.Valid;
 public class LoginController {
 
     private final UserAccountService userAccountService;
+    private final TokenManager tokenManager;
 
     @PostMapping ("/login")
     public ResultEntity<TokenInfoVO> login(@Valid @RequestBody AuthDTO authDTO) {
         UserInfoTokenBO userInfoToken = userAccountService
                 .getUserInfoToken(authDTO.getPrincipal(), authDTO.getCredentials(), authDTO.getSysType());
-        System.out.println(userInfoToken);
-        return ResultEntity.success(null);
+        return ResultEntity.success(tokenManager.storeAccessToken(userInfoToken));
     }
 }

@@ -1,4 +1,4 @@
-package fun.lance.common.model;
+package fun.lance.common.base;
 
 import lombok.Data;
 
