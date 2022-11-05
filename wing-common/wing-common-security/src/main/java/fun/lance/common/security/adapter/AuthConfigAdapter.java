@@ -1,4 +1,4 @@
-package fun.lance.wing.common.security.adapter;
+package fun.lance.common.security.adapter;
 
 import fun.lance.common.feign.FeignInsideAuthConfig;
 import org.springframework.stereotype.Component;

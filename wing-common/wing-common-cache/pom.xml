@@ -9,18 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>wing-common-security</artifactId>
-    <version>1.0</version>
-    <packaging>jar</packaging>
-    <name>wing-common-security</name>
-    <description>wing-common-security</description>
+    <artifactId>wing-common-cache</artifactId>
+    <name>wing-common-cache</name>
+    <description>wing-common-cache</description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>fun.lance</groupId>
             <artifactId>wing-common-core</artifactId>
@@ -29,24 +22,13 @@
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-api-user</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-common-db</artifactId>
-            <version>${project.version}</version>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-jwt</artifactId>
+            <artifactId>hutool-crypto</artifactId>
         </dependency>
     </dependencies>
+
 </project>

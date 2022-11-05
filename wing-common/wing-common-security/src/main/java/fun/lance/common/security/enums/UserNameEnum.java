@@ -1,4 +1,4 @@
-package fun.lance.wing.common.security.enums;
+package fun.lance.common.security.enums;
 
 public enum UserNameEnum {
 

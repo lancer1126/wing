@@ -1,4 +1,4 @@
-package fun.lance.wing.common.security.filters;
+package fun.lance.common.security.filters;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.AntPathMatcher;
@@ -6,10 +6,9 @@ import cn.hutool.core.util.StrUtil;
 import fun.lance.common.handler.HttpHandler;
 import fun.lance.common.resp.RespEnum;
 import fun.lance.common.resp.ResultEntity;
-import fun.lance.wing.common.security.adapter.AuthConfigAdapter;
+import fun.lance.common.security.adapter.AuthConfigAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@Component
+//@Component
 @RequiredArgsConstructor
 public class AuthFilter implements Filter {
 

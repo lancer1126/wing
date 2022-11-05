@@ -1,7 +1,8 @@
 package fun.lance.user.service;
 
-import fun.lance.api.user.bo.UserInfoTokenBO;
+import fun.lance.api.user.model.dto.AuthDTO;
+import fun.lance.api.user.model.vo.LoginVO;
 
 public interface UserAccountService {
-    UserInfoTokenBO getUserInfoToken(String username, String password, Integer sysType);
+    LoginVO login(AuthDTO authDTO);
 }

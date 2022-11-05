@@ -1,4 +1,4 @@
-package fun.lance.user.model.domain;
+package fun.lance.api.user.model.dao;
 
 import fun.lance.common.base.BaseModel;
 import lombok.Data;
@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class AuthAccount extends BaseModel {
+
     private Long uid;
 
     /**

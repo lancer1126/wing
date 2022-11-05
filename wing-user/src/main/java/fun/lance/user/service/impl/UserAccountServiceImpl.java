@@ -1,34 +1,39 @@
 package fun.lance.user.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import fun.lance.api.user.bo.UserInfoTokenBO;
+import fun.lance.api.user.model.dto.AuthDTO;
+import fun.lance.api.user.model.vo.LoginVO;
 import fun.lance.common.exception.WingException;
-import fun.lance.common.utils.PrincipalUtil;
-import fun.lance.user.model.mapstruct.AccountMapper;
-import fun.lance.user.enums.AccountStatusEnum;
-import fun.lance.user.mapper.AuthAccountMapper;
+import fun.lance.common.security.model.bo.AuthAccountVerifyBO;
+import fun.lance.user.manager.TokenManager;
+import fun.lance.user.mapstruct.AccountStructMapper;
 import fun.lance.user.service.UserAccountService;
 import fun.lance.user.utils.MessageUtil;
-import fun.lance.wing.common.security.bo.AuthAccountVerifyBO;
-import fun.lance.wing.common.security.enums.UserNameEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class UserAccountServiceImpl implements UserAccountService {
 
-    private final AuthAccountMapper authAccountMapper;
-    private final PasswordEncoder passwordEncoder;
-    private final AccountMapper accountMapper;
+    @Value("${user.auth.cache.expire-time}")
+    private Long expiredTime;
+
+    private final TokenManager tokenManager;
+    private final AccountStructMapper accountStructMapper;
+    private final AuthenticationManager authenticationManager;
 
     @Override
-    public UserInfoTokenBO getUserInfoToken(String username, String password, Integer sysType) {
+    public LoginVO login(AuthDTO authDTO) {
+        String username = authDTO.getPrincipal();
+        String password = authDTO.getCredentials();
+
         if (StrUtil.isBlank(username)) {
             throw new WingException(MessageUtil.get("login.username.null"));
         }
@@ -36,25 +41,23 @@ public class UserAccountServiceImpl implements UserAccountService {
             throw new WingException(MessageUtil.get("login.password.null"));
         }
 
-        UserNameEnum userNameEnum = null;
-        if (PrincipalUtil.isUserName(username)) {
-            userNameEnum = UserNameEnum.USERNAME;
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(username, password);
+        Authentication authenticate = null;
+        try {
+             authenticate = authenticationManager.authenticate(authToken);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        if (userNameEnum == null) {
-            throw new WingException(MessageUtil.get("login.username.notMatch"));
-        }
-
-        AuthAccountVerifyBO acctVerifyBO = authAccountMapper
-                .getAuthAccountInfoByUsername(userNameEnum.value(), username, sysType);
-         if (acctVerifyBO == null) {
-            throw new WingException(MessageUtil.get("login.username.notExist"));
-        }
-        if (Objects.equals(acctVerifyBO.getStatus(), AccountStatusEnum.DISABLE.value())) {
-            throw new WingException(MessageUtil.get("login.username.disable"));
-        }
-        if (!passwordEncoder.matches(password, acctVerifyBO.getPassword())) {
+        if (authenticate == null) {
             throw new WingException(MessageUtil.get("login.error"));
         }
-        return accountMapper.convert(acctVerifyBO);
+
+        AuthAccountVerifyBO principal = (AuthAccountVerifyBO) authenticate.getPrincipal();
+        String token = tokenManager.storeToken(principal);
+
+        LoginVO loginVO = accountStructMapper.convert(principal.getAuthAccount());
+        loginVO.setToken(token);
+        loginVO.setExpiredIn(expiredTime);
+        return loginVO;
     }
 }

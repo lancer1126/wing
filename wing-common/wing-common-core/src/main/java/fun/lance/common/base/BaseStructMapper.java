@@ -2,8 +2,11 @@ package fun.lance.common.base;
 
 import java.util.List;
 
-public interface BaseStructMapper<D, E> {
+public interface BaseStructMapper<F, T> {
 
-    E convert(D d);
-    List <E> convert(List<D> dList);
+    T convert(F f);
+    List <T> convert(List<F> fList);
+
+    F recruit(T d);
+    List <F> recruit(List<T> tList);
 }

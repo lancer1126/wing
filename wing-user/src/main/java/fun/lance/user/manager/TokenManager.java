@@ -1,11 +1,17 @@
 package fun.lance.user.manager;
 
-import fun.lance.api.user.bo.UserInfoTokenBO;
-import fun.lance.api.user.vo.TokenInfoVO;
+import com.alibaba.fastjson.JSON;
+import fun.lance.common.constants.UserConstants;
+import fun.lance.common.security.model.bo.AuthAccountVerifyBO;
+import fun.lance.common.security.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
@@ -13,8 +19,18 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TokenManager {
 
-    public TokenInfoVO storeAccessToken(UserInfoTokenBO userInfoTokenBO) {
-        // todo 生成token
-        return null;
+    @Value("${user.auth.token.sign-key}")
+    private String tokenSignKey;
+    @Value("${user.auth.cache.expire-time}")
+    private Long expiredTime;
+
+    private final RedisTemplate<Object, Object> redisTemplate;
+
+    public String storeToken(AuthAccountVerifyBO verifyBO) {
+        String token = JwtUtil.createJwt(verifyBO, tokenSignKey);
+        String tokenKey = UserConstants.CACHE_PREFIX + token;
+        redisTemplate.opsForValue()
+                .set(tokenKey, JSON.toJSONString(verifyBO), expiredTime, TimeUnit.SECONDS);
+        return token;
     }
 }
