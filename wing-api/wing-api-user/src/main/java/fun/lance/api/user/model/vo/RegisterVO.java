@@ -5,5 +5,5 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class LoginVO extends TokenInfoVO{
+public class RegisterVO extends TokenInfoVO {
 }
