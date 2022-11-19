@@ -1,7 +1,7 @@
 package fun.lance.user.service;
 
-import fun.lance.api.user.model.dto.RegisterDTO;
-import fun.lance.api.user.model.vo.RegisterVO;
+import fun.lance.common.bean.user.dto.RegisterDTO;
+import fun.lance.common.bean.user.vo.RegisterVO;
 
 public interface RegisterService {
 

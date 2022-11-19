@@ -1,7 +1,7 @@
 package fun.lance.user.service.impl;
 
-import fun.lance.api.user.model.dto.RegisterDTO;
-import fun.lance.api.user.model.vo.RegisterVO;
+import fun.lance.common.bean.user.dto.RegisterDTO;
+import fun.lance.common.bean.user.vo.RegisterVO;
 import fun.lance.user.service.RegisterService;
 import org.springframework.stereotype.Service;
 

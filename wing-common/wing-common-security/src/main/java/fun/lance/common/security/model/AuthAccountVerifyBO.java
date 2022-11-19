@@ -1,6 +1,6 @@
-package fun.lance.common.security.model.bo;
+package fun.lance.common.security.model;
 
-import fun.lance.api.user.model.dao.AuthAccount;
+import fun.lance.common.bean.user.dao.AuthAccount;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,6 +1,6 @@
 package fun.lance.common.constants;
 
-public class UserConstants {
+public class UserConst {
 
     public static final Long EXPIRED_TIME = 3600L;
 

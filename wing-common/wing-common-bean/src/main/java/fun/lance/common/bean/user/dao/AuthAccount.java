@@ -1,5 +1,6 @@
-package fun.lance.api.user.model.dao;
+package fun.lance.common.bean.user.dao;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import fun.lance.common.base.BaseModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,6 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class AuthAccount extends BaseModel {
 
+    @TableId
     private Long uid;
 
     /**

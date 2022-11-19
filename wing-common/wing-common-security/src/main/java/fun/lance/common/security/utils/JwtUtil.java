@@ -1,9 +1,9 @@
 package fun.lance.common.security.utils;
 
 import cn.hutool.jwt.JWT;
-import fun.lance.api.user.model.dao.AuthAccount;
+import fun.lance.common.bean.user.dao.AuthAccount;
 import fun.lance.common.exception.WingException;
-import fun.lance.common.security.model.bo.AuthAccountVerifyBO;
+import fun.lance.common.security.model.AuthAccountVerifyBO;
 
 import java.nio.charset.StandardCharsets;
 

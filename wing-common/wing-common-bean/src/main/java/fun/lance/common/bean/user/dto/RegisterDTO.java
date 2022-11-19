@@ -1,4 +1,4 @@
-package fun.lance.api.user.model.dto;
+package fun.lance.common.bean.user.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

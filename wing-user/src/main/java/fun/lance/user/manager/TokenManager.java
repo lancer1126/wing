@@ -1,8 +1,8 @@
 package fun.lance.user.manager;
 
 import com.alibaba.fastjson.JSON;
-import fun.lance.common.constants.UserConstants;
-import fun.lance.common.security.model.bo.AuthAccountVerifyBO;
+import fun.lance.common.constants.UserConst;
+import fun.lance.common.security.model.AuthAccountVerifyBO;
 import fun.lance.common.security.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class TokenManager {
 
     public String storeToken(AuthAccountVerifyBO verifyBO) {
         String token = JwtUtil.createJwt(verifyBO, tokenSignKey);
-        String tokenKey = UserConstants.CACHE_PREFIX + token;
+        String tokenKey = UserConst.CACHE_PREFIX + token;
         redisTemplate.opsForValue()
                 .set(tokenKey, JSON.toJSONString(verifyBO), expiredTime, TimeUnit.SECONDS);
         return token;

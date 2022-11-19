@@ -1,10 +1,10 @@
 package fun.lance.user.service.impl;
 
 import cn.hutool.core.util.StrUtil;
-import fun.lance.api.user.model.dto.AuthDTO;
-import fun.lance.api.user.model.vo.LoginVO;
+import fun.lance.common.bean.user.dto.AuthDTO;
+import fun.lance.common.bean.user.vo.LoginVO;
 import fun.lance.common.exception.WingException;
-import fun.lance.common.security.model.bo.AuthAccountVerifyBO;
+import fun.lance.common.security.model.AuthAccountVerifyBO;
 import fun.lance.user.manager.TokenManager;
 import fun.lance.user.mapstruct.AccountStructMapper;
 import fun.lance.user.service.UserAccountService;

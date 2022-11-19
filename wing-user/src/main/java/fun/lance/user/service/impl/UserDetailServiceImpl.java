@@ -2,9 +2,9 @@ package fun.lance.user.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import fun.lance.api.user.model.dao.AuthAccount;
+import fun.lance.common.bean.user.dao.AuthAccount;
 import fun.lance.common.exception.WingException;
-import fun.lance.common.security.model.bo.AuthAccountVerifyBO;
+import fun.lance.common.security.model.AuthAccountVerifyBO;
 import fun.lance.user.mapper.AuthAccountMapper;
 import fun.lance.user.utils.MessageUtil;
 import lombok.RequiredArgsConstructor;

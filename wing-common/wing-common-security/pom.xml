@@ -48,5 +48,12 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-jwt</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-bean</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
