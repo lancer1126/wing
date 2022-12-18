@@ -54,6 +54,7 @@
         <spring.aop.version>2.7.4</spring.aop.version>
         <jedis.version>3.9.0</jedis.version>
         <alipay-sdk-java.version>4.34.47.ALL</alipay-sdk-java.version>
+        <captcha.version>1.2.5</captcha.version>
 
         <!-- distributed -->
         <seata.version>1.5.1</seata.version>
@@ -61,6 +62,7 @@
 
         <!-- oss -->
         <minio.version>8.3.7</minio.version>
+        <qcloud.version>5.6.117</qcloud.version>
 
         <!-- http -->
         <okhttp3.version>4.10.0</okhttp3.version>
@@ -218,10 +220,28 @@
                 <artifactId>alipay-sdk-java</artifactId>
                 <version>${alipay-sdk-java.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.github.anji-plus</groupId>
+                <artifactId>captcha</artifactId>
+                <version>${captcha.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>${qcloud.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <pluginManagement>
             <plugins>
                 <!-- maven-compiler-plugin 插件，解决 Lombok + MapStruct 组合 -->
@@ -246,6 +266,23 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin.version}</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <delimiters>
+                        <delimiter>@</delimiter>
+                    </delimiters>
+                    <useDefaultDelimiters>false</useDefaultDelimiters>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>

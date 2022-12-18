@@ -2,10 +2,12 @@ package fun.lance.common.resp;
 
 public enum RespEnum {
     SUCCESS(200, "success"),
+    FAIL(400, "fail"),
     UNAUTHORIZED(401, "Unauthorized"),
     METHOD_ARGUMENT_NOT_VALID(701, "method argument not valid"),
     APP_EXCEPTION(777, "application exception"),
-    FAIL(400, "fail");
+    FILE_UPLOAD_ERROR(702, "file upload error"),
+    ;
 
     private final Integer code;
     private final String msg;
