@@ -1,5 +1,6 @@
 package fun.lance.biz.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.qcloud.cos.model.UploadResult;
 import fun.lance.biz.manager.TencentCOSManager;
@@ -35,6 +36,14 @@ public class OSServiceImpl implements OSService {
         UploadResult upload = tencentCOSManager.upload(inputStream);
         log.info(JSON.toJSONString(upload));
         return upload;
+    }
+
+    @Override
+    public Object downloadFromTencentCOS(String fileId) {
+        if (StrUtil.isBlank(fileId)) {
+            throw new WingException("fieldId is empty");
+        }
+        return tencentCOSManager.download(fileId);
     }
 
 }

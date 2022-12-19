@@ -7,10 +7,12 @@ import com.qcloud.cos.auth.BasicCOSCredentials;
 import com.qcloud.cos.auth.COSCredentials;
 import com.qcloud.cos.exception.CosClientException;
 import com.qcloud.cos.http.HttpProtocol;
+import com.qcloud.cos.model.GetObjectRequest;
 import com.qcloud.cos.model.ObjectMetadata;
 import com.qcloud.cos.model.PutObjectRequest;
 import com.qcloud.cos.model.UploadResult;
 import com.qcloud.cos.region.Region;
+import com.qcloud.cos.transfer.Download;
 import com.qcloud.cos.transfer.TransferManager;
 import com.qcloud.cos.transfer.TransferManagerConfiguration;
 import com.qcloud.cos.transfer.Upload;
@@ -19,12 +21,13 @@ import fun.lance.common.resp.RespEnum;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Component
-public class TencentCOSManager implements OSManager<UploadResult, InputStream> {
+public class TencentCOSManager {
 
     @Value("${tencentCloud.cos.region}")
     private String region;
@@ -39,7 +42,6 @@ public class TencentCOSManager implements OSManager<UploadResult, InputStream> {
     @Value("${tencentCloud.cos.bucket.name}")
     private String bucketName;
 
-    @Override
     public UploadResult upload(InputStream fileStream) {
         String key = IdWorker.getIdStr();
         TransferManager transferManager = createTransferManager();
@@ -56,6 +58,22 @@ public class TencentCOSManager implements OSManager<UploadResult, InputStream> {
 
         shutdownTransferManager(transferManager);
         return uploadResult;
+    }
+
+    public Object download(String fileId) {
+        TransferManager transferManager = createTransferManager();
+        GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, fileId);
+
+        File downloadFile = new File("./example");
+        try {
+            Download download = transferManager.download(getObjectRequest, downloadFile);
+            download.waitForCompletion();
+        } catch (InterruptedException e) {
+            throw new WingException("Download error, fieldId: " + fileId);
+        }
+
+        shutdownTransferManager(transferManager);
+        return null;
     }
 
     /**

@@ -6,4 +6,5 @@ public interface OSService {
 
     Object uploadToTencentCOS(MultipartFile file);
 
+    Object downloadFromTencentCOS(String fileId);
 }
