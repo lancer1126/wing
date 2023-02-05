@@ -15,7 +15,7 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        shared-configs: application-wing-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+        shared-configs: wing-application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
   messages:
