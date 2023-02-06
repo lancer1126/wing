@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
     <property name="log.path" value="z-logs/${APP_NAME}/${APP_NAME}-%d{yyyy-MM-dd}.log"/>

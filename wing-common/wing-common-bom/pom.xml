@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fun.lance</groupId>
+    <artifactId>wing-common-bom</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>wing-common-bom</name>
+    <description>wing-common-bom</description>
+
+    <properties>
+        <wing.common.version>${project.version}</wing.common.version>
+        <spring-boot.version>2.7.8</spring-boot.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mysql.version>8.0.19</mysql.version>
+        <druid.version>1.2.4</druid.version>
+        <knife4j.version>2.0.9</knife4j.version>
+        <swagger.version>1.6.2</swagger.version>
+
+        <hutool.version>5.8.8</hutool.version>
+        <mapstruct.version>1.5.2.Final</mapstruct.version>
+        <easyexcel.version>3.0.5</easyexcel.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <spring.aop.version>2.7.4</spring.aop.version>
+        <jedis.version>3.9.0</jedis.version>
+        <alipay-sdk-java.version>4.34.47.ALL</alipay-sdk-java.version>
+        <captcha.version>1.2.5</captcha.version>
+        <seata.version>1.5.1</seata.version>
+        <redisson.version>3.16.8</redisson.version>
+        <minio.version>8.3.7</minio.version>
+        <qcloud.version>5.6.117</qcloud.version>
+        <okhttp3.version>4.10.0</okhttp3.version>
+        <mybatis-spring-boot-starter.version>3.5.2</mybatis-spring-boot-starter.version>
+        <pagehelper-spring-boot-starter.version>1.4.5</pagehelper-spring-boot-starter.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>fun.lance</groupId>
+                <artifactId>wing-common-cache</artifactId>
+                <version>${wing.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fun.lance</groupId>
+                <artifactId>wing-common-core</artifactId>
+                <version>${wing.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fun.lance</groupId>
+                <artifactId>wing-common-db</artifactId>
+                <version>${wing.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fun.lance</groupId>
+                <artifactId>wing-common-mq</artifactId>
+                <version>${wing.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fun.lance</groupId>
+                <artifactId>wing-common-security</artifactId>
+                <version>${wing.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fun.lance</groupId>
+                <artifactId>wing-common-log</artifactId>
+                <version>${wing.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring.aop.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-spring-boot-starter.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!-- 分布式文件存储 -->
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>${seata.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-micro-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-ui</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+
+            <!-- 分布式锁 -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easyexcel.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>${hutool.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>${alipay-sdk-java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.anji-plus</groupId>
+                <artifactId>captcha</artifactId>
+                <version>${captcha.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.qcloud</groupId>
+                <artifactId>cos_api</artifactId>
+                <version>${qcloud.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

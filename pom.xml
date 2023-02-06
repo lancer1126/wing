@@ -26,6 +26,7 @@
         <module>wing-common</module>
         <module>wing-gateway</module>
         <module>wing-user</module>
+        <module>wing-order</module>
     </modules>
 
     <dependencies>

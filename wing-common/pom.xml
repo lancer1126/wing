@@ -22,6 +22,7 @@
         <module>wing-common-db</module>
         <module>wing-common-mq</module>
         <module>wing-common-security</module>
+        <module>wing-common-log</module>
     </modules>
 
 </project>
