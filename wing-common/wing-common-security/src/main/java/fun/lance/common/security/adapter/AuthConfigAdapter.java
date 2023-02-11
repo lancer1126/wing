@@ -1,6 +1,5 @@
 package fun.lance.common.security.adapter;
 
-import fun.lance.common.feign.FeignInsideAuthConfig;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,7 +12,7 @@ public class AuthConfigAdapter {
     /**
      * 内部直接调用接口，无需登录权限
      */
-    private static final String FEIGN_INSIDER_URI = FeignInsideAuthConfig.FEIGN_INSIDE_URL_PREFIX + "/insider/**";
+    private static final String FEIGN_INSIDER_URI = "/feign/insider/**";
 
     /**
      * 外部直接调用接口，无需登录权限 unwanted auth

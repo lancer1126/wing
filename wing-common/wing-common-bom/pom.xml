@@ -58,6 +58,12 @@
 
             <dependency>
                 <groupId>fun.lance</groupId>
+                <artifactId>wing-common-log</artifactId>
+                <version>${wing.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>fun.lance</groupId>
                 <artifactId>wing-common-mq</artifactId>
                 <version>${wing.common.version}</version>
             </dependency>
@@ -70,8 +76,8 @@
 
             <dependency>
                 <groupId>fun.lance</groupId>
-                <artifactId>wing-common-log</artifactId>
-                <version>${wing.common.version}</version>
+                <artifactId>wing-api-user</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>

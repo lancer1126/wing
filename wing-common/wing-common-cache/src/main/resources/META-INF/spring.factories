@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+fun.lance.common.cache.config.RedisConfig,\
+fun.lance.common.cache.utils.BusinessSnGenerator

@@ -39,6 +39,26 @@
             <groupId>fun.lance</groupId>
             <artifactId>wing-common-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-log</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-api-user</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-cache</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-security</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"fun.lance.api.user.api"})
 public class WingOrderApplication {
 
     public static void main(String[] args) {

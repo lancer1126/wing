@@ -1,8 +1,8 @@
 package fun.lance.user.controller;
 
-import fun.lance.common.bean.user.dto.RegisterDTO;
-import fun.lance.common.bean.user.vo.RegisterVO;
 import fun.lance.common.resp.ResultEntity;
+import fun.lance.user.domain.dto.RegisterDTO;
+import fun.lance.user.domain.vo.RegisterVO;
 import fun.lance.user.service.RegisterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

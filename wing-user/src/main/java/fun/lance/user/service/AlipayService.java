@@ -1,8 +1,8 @@
 package fun.lance.user.service;
 
 import com.alipay.api.AlipayClient;
-import fun.lance.common.bean.user.dto.AlipayAuthDTO;
-import fun.lance.common.bean.user.vo.AlipayAuthVO;
+import fun.lance.user.domain.dto.AlipayAuthDTO;
+import fun.lance.user.domain.vo.AlipayAuthVO;
 
 public interface AlipayService {
 

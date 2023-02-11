@@ -12,12 +12,12 @@ import com.alipay.api.request.AlipaySystemOauthTokenRequest;
 import com.alipay.api.request.AlipayUserInfoShareRequest;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.response.AlipayUserInfoShareResponse;
-import fun.lance.common.bean.user.bo.AlipayAuthRespBO;
-import fun.lance.common.bean.user.dto.AlipayAuthDTO;
-import fun.lance.common.bean.user.vo.AlipayAuthVO;
-import fun.lance.common.constants.AlipayConst;
+import fun.lance.user.common.constants.AlipayConst;
 import fun.lance.common.constants.enums.DataFormatEnum;
 import fun.lance.common.exception.WingException;
+import fun.lance.user.domain.bo.AlipayAuthRespBO;
+import fun.lance.user.domain.dto.AlipayAuthDTO;
+import fun.lance.user.domain.vo.AlipayAuthVO;
 import fun.lance.user.service.AlipayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,17 +30,17 @@ import java.nio.charset.StandardCharsets;
 @Service
 public class AlipayServiceImpl implements AlipayService {
 
-    @Value("${alipay.oauth.appid}")
+    @Value("${alipay.oauth.appid:1}")
     private String appId;
-    @Value("${alipay.oauth.private-key}")
+    @Value("${alipay.oauth.private-key:1}")
     private String privateKey;
-    @Value("${alipay.oauth.alipay-public-key}")
+    @Value("${alipay.oauth.alipay-public-key:1}")
     private String alipayPublicKey;
-    @Value("${alipay.oauth.sign-type}")
+    @Value("${alipay.oauth.sign-type:1}")
     private String signType;
-    @Value("${alipay.oauth.callback-url}")
+    @Value("${alipay.oauth.callback-url:1}")
     private String callBackUrl;
-    @Value("${alipay.oauth.scope}")
+    @Value("${alipay.oauth.scope:1}")
     private String scope;
 
     @Override

@@ -1,5 +1,7 @@
 package fun.lance.common.security.config;
 
+import cn.hutool.core.convert.Convert;
+import fun.lance.common.security.common.SecurityConst;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,8 +28,7 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/ua/**").permitAll()
-                .antMatchers("/webjars/**", "/doc.html", "/swagger-resources/**", "/v2/api-docs").permitAll()
+                .antMatchers(Convert.toStrArray(SecurityConst.IGNORE_URLS)).permitAll()
                 .anyRequest().authenticated();
         return http.build();
     }

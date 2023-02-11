@@ -15,6 +15,8 @@ public class ResultEntity<T> implements Serializable {
     private String msg;
     private T data;
 
+    public ResultEntity() {}
+
     public ResultEntity(Boolean success, Integer code, String msg, T data) {
         this.success = success;
         this.code = code;

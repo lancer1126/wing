@@ -13,13 +13,11 @@
     <version>1.0</version>
     <name>wing-api-user</name>
     <packaging>jar</packaging>
-    <description>wing-api-user</description>
 
     <dependencies>
         <dependency>
             <groupId>fun.lance</groupId>
             <artifactId>wing-common-core</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

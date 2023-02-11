@@ -43,39 +43,23 @@
         <dependency>
             <groupId>fun.lance</groupId>
             <artifactId>wing-common-core</artifactId>
-            <version>${project.version}</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>fun.lance</groupId>-->
+<!--            <artifactId>wing-common-security</artifactId>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-cache</artifactId>
         </dependency>
         <dependency>
             <groupId>fun.lance</groupId>
             <artifactId>wing-api-user</artifactId>
-            <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-common-security</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-common-db</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-common-cache</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-common-bean</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.github.anji-plus</groupId>
             <artifactId>captcha</artifactId>
