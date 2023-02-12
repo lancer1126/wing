@@ -55,10 +55,10 @@
             <artifactId>wing-common-cache</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-common-security</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>fun.lance</groupId>-->
+<!--            <artifactId>wing-common-security</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

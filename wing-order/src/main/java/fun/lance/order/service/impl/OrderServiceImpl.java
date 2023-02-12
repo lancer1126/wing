@@ -4,7 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import fun.lance.api.user.api.MemberFeignClient;
 import fun.lance.common.cache.utils.BusinessSnGenerator;
-import fun.lance.common.constants.enums.BusinessType;
+import fun.lance.common.common.enums.BusinessType;
 import fun.lance.order.common.OrderConst;
 import fun.lance.order.domain.dto.OrderItemDTO;
 import fun.lance.order.domain.vo.OrderConfirmVO;

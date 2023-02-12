@@ -1,4 +1,4 @@
-package fun.lance.common.constants;
+package fun.lance.common.common.constants;
 
 public class CacheConst {
 

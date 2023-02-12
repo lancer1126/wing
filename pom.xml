@@ -22,6 +22,7 @@
 
     <modules>
         <module>wing-api</module>
+        <module>wing-auth</module>
         <module>wing-biz</module>
         <module>wing-common</module>
         <module>wing-gateway</module>

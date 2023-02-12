@@ -1,7 +1,7 @@
 package fun.lance.common.cache.utils;
 
-import fun.lance.common.constants.CacheConst;
-import fun.lance.common.constants.enums.BusinessType;
+import fun.lance.common.common.constants.CacheConst;
+import fun.lance.common.common.enums.BusinessType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;

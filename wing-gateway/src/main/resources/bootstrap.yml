@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: wing-gateway
+  profiles:
+    active: dev
   cloud:
     nacos:
       discovery:
@@ -15,5 +17,3 @@ spring:
         shared-configs: wing-application-dev.yml
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
-  profiles:
-    active: dev

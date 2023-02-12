@@ -13,7 +13,7 @@ import com.alipay.api.request.AlipayUserInfoShareRequest;
 import com.alipay.api.response.AlipaySystemOauthTokenResponse;
 import com.alipay.api.response.AlipayUserInfoShareResponse;
 import fun.lance.user.common.constants.AlipayConst;
-import fun.lance.common.constants.enums.DataFormatEnum;
+import fun.lance.common.common.enums.DataFormatEnum;
 import fun.lance.common.exception.WingException;
 import fun.lance.user.domain.bo.AlipayAuthRespBO;
 import fun.lance.user.domain.dto.AlipayAuthDTO;

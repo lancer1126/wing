@@ -1,4 +1,4 @@
-package fun.lance.user.config;
+package fun.lance.common.config;
 
 import cn.hutool.core.util.StrUtil;
 import org.springframework.context.annotation.Configuration;

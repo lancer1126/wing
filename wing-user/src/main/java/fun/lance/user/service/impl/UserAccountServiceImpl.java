@@ -2,10 +2,10 @@ package fun.lance.user.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import fun.lance.common.exception.WingException;
+import fun.lance.common.utils.MessageUtil;
 import fun.lance.user.domain.dto.AuthDTO;
 import fun.lance.user.domain.vo.LoginVO;
 import fun.lance.user.service.UserAccountService;
-import fun.lance.user.common.utils.MessageUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

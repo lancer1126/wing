@@ -1,4 +1,4 @@
-package fun.lance.common.constants.enums;
+package fun.lance.common.common.enums;
 
 public enum DataFormatEnum {
     JSON("json"),

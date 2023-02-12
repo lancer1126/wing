@@ -1,4 +1,4 @@
-package fun.lance.user.config;
+package fun.lance.common.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

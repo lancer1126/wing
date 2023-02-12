@@ -16,6 +16,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>wing-common-bom</module>
         <module>wing-common-cache</module>
         <module>wing-common-core</module>
         <module>wing-common-db</module>

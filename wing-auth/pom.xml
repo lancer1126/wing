@@ -2,7 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>fun.lance</groupId>
         <artifactId>wing</artifactId>
@@ -10,20 +9,16 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <artifactId>wing-user</artifactId>
-    <version>1.0</version>
-    <name>wing-user</name>
-    <packaging>jar</packaging>
-    <description>wing-user</description>
+    <artifactId>wing-auth</artifactId>
+    <name>wing-auth</name>
+    <description>wing-auth</description>
 
     <dependencies>
-        <!--Spring Cloud & Alibaba -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
 
-        <!-- 注册中心 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -34,20 +29,19 @@
             <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
-        <!-- 配置中心 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.alipay.sdk</groupId>
-            <artifactId>alipay-sdk-java</artifactId>
+            <groupId>org.springframework.security.oauth.boot</groupId>
+            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.github.anji-plus</groupId>
-            <artifactId>captcha</artifactId>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-oauth2-jose</artifactId>
         </dependency>
 
         <dependency>
@@ -55,19 +49,9 @@
             <artifactId>wing-common-core</artifactId>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>fun.lance</groupId>-->
-<!--            <artifactId>wing-common-security</artifactId>-->
-<!--        </dependency>-->
-
         <dependency>
             <groupId>fun.lance</groupId>
             <artifactId>wing-common-cache</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>fun.lance</groupId>
-            <artifactId>wing-api-user</artifactId>
         </dependency>
     </dependencies>
 

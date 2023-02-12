@@ -4,6 +4,8 @@ public enum RespEnum {
     SUCCESS(200, "success"),
     FAIL(400, "fail"),
     UNAUTHORIZED(401, "Unauthorized"),
+    TOKEN_INVALID(402, "Token Invalid"),
+    FORBIDDEN(402, "No permission, access forbidden"),
     METHOD_ARGUMENT_NOT_VALID(701, "method argument not valid"),
     APP_EXCEPTION(777, "application exception"),
     FILE_UPLOAD_ERROR(702, "file upload error"),
