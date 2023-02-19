@@ -55,6 +55,16 @@
             <artifactId>wing-common-cache</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-db</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>fun.lance</groupId>
+            <artifactId>wing-common-mq</artifactId>
+        </dependency>
+
 <!--        <dependency>-->
 <!--            <groupId>fun.lance</groupId>-->
 <!--            <artifactId>wing-common-security</artifactId>-->

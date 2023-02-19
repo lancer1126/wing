@@ -2,34 +2,56 @@ package fun.lance.order.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
+import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import fun.lance.api.user.api.MemberFeignClient;
 import fun.lance.common.cache.utils.BusinessSnGenerator;
 import fun.lance.common.common.enums.BusinessType;
-import fun.lance.order.common.OrderConst;
+import fun.lance.common.exception.WingException;
+import fun.lance.common.utils.MessageUtil;
+import fun.lance.order.common.constant.OrderConst;
+import fun.lance.order.common.enums.OrderStatusEnum;
+import fun.lance.order.conveter.OrderConverter;
+import fun.lance.order.conveter.OrderItemConverter;
 import fun.lance.order.domain.dto.OrderItemDTO;
+import fun.lance.order.domain.dto.OrderSubmitDTO;
+import fun.lance.order.domain.entity.Order;
+import fun.lance.order.domain.entity.OrderItem;
 import fun.lance.order.domain.vo.OrderConfirmVO;
+import fun.lance.order.domain.vo.OrderSubmitResultVO;
+import fun.lance.order.mapper.OrderMapper;
+import fun.lance.order.service.OrderItemService;
 import fun.lance.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
     private final Executor threadPoolTaskExecutor;
     private final MemberFeignClient memberFeignClient;
     private final BusinessSnGenerator businessSnGenerator;
     private final RedisTemplate<Object, Object> redisTemplate;
+    private final OrderConverter orderConverter;
+    private final OrderItemConverter orderItemConverter;
+    private final OrderItemService orderItemService;
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     public OrderConfirmVO confirmOrder(Long skuId) {
@@ -67,6 +89,71 @@ public class OrderServiceImpl implements OrderService {
         CompletableFuture.allOf(orderItemFuture, addressFuture, tokenFuture).join();
         log.info("订单确认: {}", orderConfirmVO);
         return orderConfirmVO;
+    }
+
+    @Override
+    @Transactional
+    public OrderSubmitResultVO submitOrder(OrderSubmitDTO orderSubmitDTO) {
+        log.info("订单提交：" + JSON.toJSONString(orderSubmitDTO));
+
+        List<OrderItemDTO> orderItems = orderSubmitDTO.getOrderItems();
+        if (CollUtil.isEmpty(orderItems)) {
+            throw new WingException("订单数量为空");
+        }
+        // 订单重复提交检测
+        String orderToken = orderSubmitDTO.getOrderToken();
+        Long lockResult = redisTemplate.execute(new DefaultRedisScript<>(
+                "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end", Long.class
+                ),
+                CollUtil.newArrayList(OrderConst.ORDER_RESUBMIT_LOCK_PREFIX + orderToken), orderToken);
+        lockResult = Optional.ofNullable(lockResult).orElse(0L);
+        if (lockResult.equals(1L)) {
+            throw new WingException(MessageUtil.get("order.submit.repeat"));
+        }
+
+        // todo 订单验价
+
+        // todo 锁定订单商品的库存
+
+        // 保存订单
+        Order orderEntity = orderConverter.submitDTO2Entity(orderSubmitDTO);
+        orderEntity.setStatus(OrderStatusEnum.UNPAID.getValue());
+        orderEntity.setMemberId(111L);  // 伪数据
+        boolean saveResult = save(orderEntity);
+
+        Long orderId = orderEntity.getId();
+        if (saveResult) {
+            List<OrderItem> itemEntities = orderItemConverter.dto2Entity(orderId, orderItems);
+            saveResult = orderItemService.saveBatch(itemEntities);
+            if (saveResult) {
+                // 设置订单超时未支付则关闭订单
+                rabbitTemplate.convertAndSend(
+                        OrderConst.MQ.ORDER_EXCHANGE,
+                        OrderConst.MQ.ORDER_CLOSE_DELAY_ROUTING_KEY,
+                        orderToken
+                );
+            }
+        }
+        if (!saveResult) {
+            throw new WingException("订单提交失败");
+        }
+        return new OrderSubmitResultVO(orderId, orderEntity.getOrderSn());
+    }
+
+    @Override
+    public void closeOrder(String orderSn) {
+        Order order = getOne(new LambdaQueryWrapper<Order>()
+                .eq(Order::getOrderSn, orderSn)
+                .select(Order::getId, Order::getStatus));
+        if (orderSn == null) {
+            throw new WingException("订单不存在");
+        }
+
+        if (OrderStatusEnum.UNPAID.getValue().equals(order.getStatus())) {
+            order.setStatus(OrderStatusEnum.CANCELED.getValue());
+            updateById(order);
+            // todo 关单成功释放锁定的商品库存
+        }
     }
 
     /**

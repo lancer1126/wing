@@ -17,6 +17,6 @@ spring:
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
         shared-configs[0]:
-          data-id: wing-application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+          data-id: wing-common-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         shared-configs[1]:
-          data-id: wing-common-cache-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+          data-id: wing-app-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
