@@ -6,7 +6,6 @@
         <groupId>fun.lance</groupId>
         <artifactId>wing-common</artifactId>
         <version>1.0</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <artifactId>wing-common-mq</artifactId>

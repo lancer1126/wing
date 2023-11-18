@@ -77,7 +77,7 @@ public class AlipayServiceImpl implements AlipayService {
             AlipayAuthRespBO respBO = JSON.parseObject(response.getBody(), AlipayAuthRespBO.class, snakeToCamelConfig);
             alipayAuthVO = respBO.getAlipaySystemOauthTokenResponse();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("", e);
             throw new WingException("Get token from alipay error");
         }
 
