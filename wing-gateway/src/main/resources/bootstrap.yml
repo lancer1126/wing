@@ -4,7 +4,7 @@ spring:
   application:
     name: wing-gateway
   profiles:
-    active: dev
+    active: "@profiles.active@"
   cloud:
     nacos:
       discovery:
@@ -14,6 +14,7 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        shared-configs: wing-application-dev.yml
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
+        shared-configs[0]:
+          data-id: wing-common-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}

@@ -15,9 +15,7 @@ spring:
       config:
         server-addr: ${spring.cloud.nacos.discovery.server-addr}
         file-extension: yml
-        shared-configs: application-wing-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
         username: ${spring.cloud.nacos.discovery.username}
         password: ${spring.cloud.nacos.discovery.password}
-  messages:
-    basename: i18n/messages
-    encoding: UTF-8
+        shared-configs[0]:
+          data-id: wing-common-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
