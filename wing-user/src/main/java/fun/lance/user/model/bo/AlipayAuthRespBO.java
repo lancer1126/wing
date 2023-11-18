@@ -1,6 +1,6 @@
-package fun.lance.user.domain.bo;
+package fun.lance.user.model.bo;
 
-import fun.lance.user.domain.vo.AlipayAuthVO;
+import fun.lance.user.model.vo.AlipayAuthVO;
 import lombok.Data;
 
 @Data

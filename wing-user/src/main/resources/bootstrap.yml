@@ -19,3 +19,4 @@ spring:
         password: ${spring.cloud.nacos.discovery.password}
         shared-configs[0]:
           data-id: wing-common-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+          refresh: true

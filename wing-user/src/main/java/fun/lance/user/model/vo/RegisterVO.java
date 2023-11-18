@@ -1,4 +1,4 @@
-package fun.lance.user.domain.vo;
+package fun.lance.user.model.vo;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

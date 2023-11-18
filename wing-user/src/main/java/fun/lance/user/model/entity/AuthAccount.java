@@ -1,4 +1,4 @@
-package fun.lance.user.domain.dao;
+package fun.lance.user.model.entity;
 
 import fun.lance.common.base.BaseModel;
 import lombok.Data;

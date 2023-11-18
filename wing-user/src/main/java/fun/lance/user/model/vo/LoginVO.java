@@ -1,4 +1,4 @@
-package fun.lance.user.domain.vo;
+package fun.lance.user.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

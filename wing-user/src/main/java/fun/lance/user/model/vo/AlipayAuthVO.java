@@ -1,6 +1,6 @@
-package fun.lance.user.domain.vo;
+package fun.lance.user.model.vo;
 
-import fun.lance.user.domain.dto.AlipayAuthDTO;
+import fun.lance.user.model.dto.AlipayAuthDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -3,7 +3,7 @@
     <springProperty scope="context" name="APP_NAME" source="spring.application.name"/>
     <property name="log.path" value="z-logs/${APP_NAME}/${APP_NAME}-%d{yyyy-MM-dd}.log"/>
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n" />
-    <property name="log.pattern.colored" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %magenta(%logger) - %cyan(%msg%n)" />
+    <property name="log.pattern.colored" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %highlight(%-5level) %cyan(%logger) - %green(%msg%n)" />
 
     <contextName>logback</contextName>
     <!--输出到控制台-->

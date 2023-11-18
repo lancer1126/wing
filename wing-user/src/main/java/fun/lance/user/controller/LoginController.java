@@ -1,10 +1,10 @@
 package fun.lance.user.controller;
 
 import fun.lance.common.resp.ResultEntity;
-import fun.lance.user.domain.dto.AlipayAuthDTO;
-import fun.lance.user.domain.dto.AuthDTO;
-import fun.lance.user.domain.vo.AlipayAuthVO;
-import fun.lance.user.domain.vo.LoginVO;
+import fun.lance.user.model.dto.AlipayAuthDTO;
+import fun.lance.user.model.dto.AuthDTO;
+import fun.lance.user.model.vo.AlipayAuthVO;
+import fun.lance.user.model.vo.LoginVO;
 import fun.lance.user.service.AlipayService;
 import fun.lance.user.service.UserAccountService;
 import io.swagger.annotations.Api;
