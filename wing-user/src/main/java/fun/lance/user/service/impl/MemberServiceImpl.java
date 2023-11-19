@@ -2,20 +2,24 @@ package fun.lance.user.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Assert;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import fun.lance.api.user.dto.MemberAddressDTO;
-import fun.lance.user.model.dto.MemberRegisterDTO;
-import fun.lance.user.common.constants.MessageConst;
+import fun.lance.common.mq.group.UserGroup;
 import fun.lance.user.convert.MemberConvert;
 import fun.lance.user.mapper.MemberMapper;
+import fun.lance.user.model.dto.MemberRegisterDTO;
 import fun.lance.user.model.entity.Member;
 import fun.lance.user.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -41,10 +45,22 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
 
     @Override
     public Long addMember(MemberRegisterDTO memberDTO) {
+        // 测试数据
+        memberDTO.setCity("shanghai");
+        memberDTO.setProvince("shanghai");
+        memberDTO.setBirthday(LocalDate.now());
+        memberDTO.setCountry("china");
+        memberDTO.setAvatarUrl("xxx.net");
+        memberDTO.setLanguage("zh");
+        memberDTO.setMobile("12431");
+        memberDTO.setNickName("nnn" + UUID.randomUUID().toString().substring(0, 4));
+        memberDTO.setSessionKey("kkk" + UUID.randomUUID().toString().substring(0, 4));
+        memberDTO.setOpenid("xxx" + UUID.randomUUID().toString().substring(0, 4));
+
         Member member = memberConvert.dto2Entity(memberDTO);
         boolean save = save(member);
         Assert.isTrue(save, "新增会员失败");
-        rabbitTemplate.convertAndSend(MessageConst.USER_EXCHANGE, MessageConst.USER_ROUTING_KEY, member);
+        rabbitTemplate.convertAndSend(UserGroup.USER_EXCHANGE, UserGroup.USER_ROUTING_KEY, JSON.toJSONString(member), new CorrelationData(member.getOpenid()));
         return member.getId();
     }
 }

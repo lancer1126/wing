@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-import static fun.lance.order.common.constant.OrderConst.MQ.*;
+import static fun.lance.common.mq.group.OrderGroup.MQ.*;
 
 @Slf4j
 @Component

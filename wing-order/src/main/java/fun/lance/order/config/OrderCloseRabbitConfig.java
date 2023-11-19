@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import java.util.HashMap;
 import java.util.Map;
 
-import static fun.lance.order.common.constant.OrderConst.MQ.*;
+import static fun.lance.common.mq.group.OrderGroup.MQ.*;
 
 @Slf4j
 @Configuration

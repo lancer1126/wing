@@ -10,7 +10,7 @@ import fun.lance.common.cache.utils.BusinessSnGenerator;
 import fun.lance.common.common.enums.BusinessType;
 import fun.lance.common.exception.WingException;
 import fun.lance.common.utils.MessageUtil;
-import fun.lance.order.common.constant.OrderConst;
+import fun.lance.common.mq.group.OrderGroup;
 import fun.lance.order.common.enums.OrderStatusEnum;
 import fun.lance.order.conveter.OrderConverter;
 import fun.lance.order.conveter.OrderItemConverter;
@@ -82,7 +82,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             // 确认页面生成唯一token,订单提交根据此token判断是否重复提交
             String orderToken = businessSnGenerator.generateSerialNo(BusinessType.ORDER);
             orderConfirmVO.setOrderToken(orderToken);
-            String cacheKey = OrderConst.ORDER_RESUBMIT_LOCK_PREFIX + orderToken;
+            String cacheKey = OrderGroup.ORDER_RESUBMIT_LOCK_PREFIX + orderToken;
             redisTemplate.opsForValue().set(cacheKey, orderToken);
         }, threadPoolTaskExecutor);
 
@@ -105,7 +105,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         Long lockResult = redisTemplate.execute(new DefaultRedisScript<>(
                 "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end", Long.class
                 ),
-                CollUtil.newArrayList(OrderConst.ORDER_RESUBMIT_LOCK_PREFIX + orderToken), orderToken);
+                CollUtil.newArrayList(OrderGroup.ORDER_RESUBMIT_LOCK_PREFIX + orderToken), orderToken);
         lockResult = Optional.ofNullable(lockResult).orElse(0L);
         if (lockResult.equals(1L)) {
             throw new WingException(MessageUtil.get("order.submit.repeat"));
@@ -128,8 +128,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             if (saveResult) {
                 // 设置订单超时未支付则关闭订单
                 rabbitTemplate.convertAndSend(
-                        OrderConst.MQ.ORDER_EXCHANGE,
-                        OrderConst.MQ.ORDER_CLOSE_DELAY_ROUTING_KEY,
+                        OrderGroup.MQ.ORDER_EXCHANGE,
+                        OrderGroup.MQ.ORDER_CLOSE_DELAY_ROUTING_KEY,
                         orderToken
                 );
             }

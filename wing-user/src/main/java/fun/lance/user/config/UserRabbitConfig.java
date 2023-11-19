@@ -4,7 +4,7 @@ import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static fun.lance.user.common.constants.MessageConst.*;
+import static fun.lance.common.mq.group.UserGroup.*;
 
 @Configuration
 public class UserRabbitConfig {

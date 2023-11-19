@@ -1,6 +1,6 @@
-package fun.lance.order.common.constant;
+package fun.lance.common.mq.group;
 
-public class OrderConst {
+public class OrderGroup {
 
     /**
      * 订单防重提交锁KEY前缀

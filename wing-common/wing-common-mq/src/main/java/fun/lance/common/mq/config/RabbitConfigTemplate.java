@@ -96,14 +96,12 @@ public class RabbitConfigTemplate {
                     System.out.println("ConfirmCallback     "+"原因："+s);
                 });
         //Message message, int i, String s, String s1, String s2
-        rabbitTemplate.setReturnCallback((message, i, s, s1, s2) -> {
-            System.out.println("ReturnCallback：     "+"消息："+message);
-            System.out.println("ReturnCallback：     "+"回应码："+i);
-            System.out.println("ReturnCallback：     "+"回应消息："+s);
-            System.out.println("ReturnCallback：     "+"交换机："+s1);
-            System.out.println("ReturnCallback：     "+"路由键："+s2);
-        });
+        rabbitTemplate.setConfirmCallback((message, ack, cause) -> {
+            System.out.println("ReturnCallback：     " + "消息：" + message);
+            System.out.println("ReturnCallback：     " + "ack：" + ack);
+            System.out.println("ReturnCallback：     " + "cause：" + cause);
 
+        });
         return rabbitTemplate;
     }
 
