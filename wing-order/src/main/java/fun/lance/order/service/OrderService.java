@@ -17,4 +17,6 @@ public interface OrderService {
      * 系统关闭订单
      */
     void closeOrder(String orderSn);
+
+    void transferOrder(OrderSubmitDTO orderSubmitDTO);
 }

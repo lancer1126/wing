@@ -29,4 +29,11 @@ public class OrderController {
         return ResultEntity.success(orderService.submitOrder(orderSubmitDTO));
     }
 
+    @ApiOperation("订单传输")
+    @PostMapping("/transfer")
+    public ResultEntity<Object> transferOrder(@RequestBody @Validated OrderSubmitDTO orderSubmitDTO) {
+        orderService.transferOrder(orderSubmitDTO);
+        return ResultEntity.success();
+    }
+
 }

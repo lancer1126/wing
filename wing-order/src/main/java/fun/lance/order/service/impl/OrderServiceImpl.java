@@ -26,6 +26,7 @@ import fun.lance.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
@@ -43,6 +44,9 @@ import java.util.concurrent.Executor;
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
+
+    @Value("${spring.rabbit.host}")
+    private String rabbitHost;
 
     private final Executor threadPoolTaskExecutor;
     private final MemberFeignClient memberFeignClient;
@@ -129,7 +133,7 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
                 // 设置订单超时未支付则关闭订单
                 rabbitTemplate.convertAndSend(
                         OrderGroup.MQ.ORDER_EXCHANGE,
-                        OrderGroup.MQ.ORDER_CLOSE_DELAY_ROUTING_KEY,
+                        OrderGroup.MQ.ORDER_DELAY_ROUTING_KEY,
                         orderToken
                 );
             }
@@ -154,6 +158,17 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
             updateById(order);
             // todo 关单成功释放锁定的商品库存
         }
+    }
+
+    @Override
+    public void transferOrder(OrderSubmitDTO orderSubmitDTO) {
+        log.info(rabbitHost);
+        log.info("向 {} 发送消息", OrderGroup.MQ.ORDER_EXCHANGE);
+        rabbitTemplate.convertAndSend(
+                OrderGroup.MQ.ORDER_EXCHANGE,
+                OrderGroup.MQ.ORDER_DELAY_ROUTING_KEY,
+                JSON.toJSONString(orderSubmitDTO)
+        );
     }
 
     /**
