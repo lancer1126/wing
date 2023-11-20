@@ -45,9 +45,6 @@ import java.util.concurrent.Executor;
 @RequiredArgsConstructor
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
-    @Value("${spring.rabbit.host}")
-    private String rabbitHost;
-
     private final Executor threadPoolTaskExecutor;
     private final MemberFeignClient memberFeignClient;
     private final BusinessSnGenerator businessSnGenerator;
@@ -162,7 +159,6 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     @Override
     public void transferOrder(OrderSubmitDTO orderSubmitDTO) {
-        log.info(rabbitHost);
         log.info("向 {} 发送消息", OrderGroup.MQ.ORDER_EXCHANGE);
         rabbitTemplate.convertAndSend(
                 OrderGroup.MQ.ORDER_EXCHANGE,
