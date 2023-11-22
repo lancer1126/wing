@@ -2,6 +2,7 @@ package fun.lance.common.mq.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -29,7 +30,18 @@ public class RabbitConfig {
         rabbitTemplate.setConnectionFactory(connFactory);
         rabbitTemplate.setMandatory(true);
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
-        rabbitTemplate.setConfirmCallback((correlationData, b, s) -> log.info("----- 消息确认回调： {}, {}, {} -----", correlationData, b, s));
+        // 消息成功到达exchange中回调
+        rabbitTemplate.setConfirmCallback((correlationData, b, s) -> log.info("----- Confirm回调： {}, {}, {} -----", correlationData, b, s));
+        // 消息从exchange到queue投递失败，进行回调
+        rabbitTemplate.setReturnsCallback((returnedMessage) -> {
+            log.info("----------------------Returns回调----------------------------");
+            log.info("ReturnCallback: " + "消息体： " + returnedMessage.getMessage());
+            log.info("ReturnCallback: " + "回应码： " + returnedMessage.getReplyText());
+            log.info("ReturnCallback: " + "回应信： " + returnedMessage.getReplyText());
+            log.info("ReturnCallback: " + "交换机： " + returnedMessage.getExchange());
+            log.info("ReturnCallback: " + "路由键： " + returnedMessage.getRoutingKey());
+            log.info("-------------------------------------------------------------");
+        });
         return rabbitTemplate;
     }
 }

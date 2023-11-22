@@ -18,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserMQListener {
 
-//    @RabbitListener(queues = UserGroup.USER_QUEUE)
+    @RabbitListener(queues = UserGroup.USER_QUEUE)
     public void receiveMember(String userInfo, Message message, Channel channel) throws IOException {
         // 消息序号
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
@@ -37,12 +37,13 @@ public class UserMQListener {
             if (!err) {
                 channel.basicAck(deliveryTag, true);
             } else {
-                channel.basicNack(deliveryTag, false, false);
+//                channel.basicNack(deliveryTag, false, false);
+                channel.basicReject(deliveryTag, false);
             }
         }
     }
 
-    @RabbitListener(queues = UserGroup.USER_DLX_QUEUE)
+//    @RabbitListener(queues = UserGroup.USER_DLX_QUEUE)
     public void receiveDlxMember(String userInfo, Message message, Channel channel) throws IOException {
         log.info("收到过期消息: {}", userInfo);
     }
