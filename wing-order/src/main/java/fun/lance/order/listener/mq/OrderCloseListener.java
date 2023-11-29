@@ -1,4 +1,4 @@
-package fun.lance.order.listener;
+package fun.lance.order.listener.mq;
 
 import com.rabbitmq.client.Channel;
 import fun.lance.order.service.OrderService;

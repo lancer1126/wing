@@ -60,7 +60,10 @@ public class MemberServiceImpl extends ServiceImpl<MemberMapper, Member> impleme
         Member member = memberConvert.dto2Entity(memberDTO);
         boolean save = save(member);
         Assert.isTrue(save, "新增会员失败");
-        rabbitTemplate.convertAndSend(UserGroup.USER_EXCHANGE, UserGroup.USER_ROUTING_KEY, JSON.toJSONString(member), new CorrelationData(member.getOpenid()));
+
+        rabbitTemplate.convertAndSend(
+                UserGroup.USER_FANOUT_EXCHANGE, UserGroup.USER_FANOUT_ROUTING_KEY, JSON.toJSONString(member), new CorrelationData(member.getOpenid())
+        );
         return member.getId();
     }
 }

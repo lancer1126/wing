@@ -18,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UserMQListener {
 
-    @RabbitListener(queues = UserGroup.USER_QUEUE)
+    @RabbitListener(queues = UserGroup.USER_BIZ_QUEUE)
     public void receiveMember(String userInfo, Message message, Channel channel) throws IOException {
         // 消息序号
         long deliveryTag = message.getMessageProperties().getDeliveryTag();
